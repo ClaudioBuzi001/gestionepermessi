@@ -70,6 +70,14 @@ public class Utente {
 		this.stato = stato;
 	}
 
+	public Utente(String username, String password, Date dateCreated, StatoUtente stato) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.dateCreated = dateCreated;
+		this.stato = stato;
+	}
+
 	public Long getId() {
 		return id;
 	}

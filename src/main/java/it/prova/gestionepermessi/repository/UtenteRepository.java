@@ -16,7 +16,7 @@ import it.prova.gestionepermessi.model.Utente;
 
 public interface UtenteRepository extends CrudRepository<Utente, Long> {
 
-	@EntityGraph(attributePaths = { "ruoli" })
+	@EntityGraph(attributePaths = { "ruoli", "dipendente" })
 	Optional<Utente> findByUsername(String username);
 
 	@Query("from Utente u left join fetch u.ruoli where u.id = ?1")

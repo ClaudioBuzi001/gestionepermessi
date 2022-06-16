@@ -43,7 +43,7 @@ public class RichiestePermesso {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "dipendente_id", referencedColumnName = "id", nullable = false)
-	private Dipendente dipendete;
+	private Dipendente dipendente;
 
 	public RichiestePermesso() {
 		super();
@@ -59,7 +59,7 @@ public class RichiestePermesso {
 		this.codiceCertificato = codiceCertificato;
 		this.note = note;
 		this.attachment = attachment;
-		this.dipendete = dipendete;
+		this.dipendente = dipendete;
 	}
 
 	public RichiestePermesso(Long id, TipoPermesso tipoPermesso, Date dataInizio, Date dataFine, boolean approvato,
@@ -73,7 +73,7 @@ public class RichiestePermesso {
 		this.codiceCertificato = codiceCertificato;
 		this.note = note;
 		this.attachment = attachment;
-		this.dipendete = dipendete;
+		this.dipendente = dipendete;
 	}
 
 	public Long getId() {
@@ -140,12 +140,12 @@ public class RichiestePermesso {
 		this.attachment = attachment;
 	}
 
-	public Dipendente getDipendete() {
-		return dipendete;
+	public Dipendente getDipendente() {
+		return dipendente;
 	}
 
-	public void setDipendete(Dipendente dipendete) {
-		this.dipendete = dipendete;
+	public void setDipendente(Dipendente dipendete) {
+		this.dipendente = dipendete;
 	}
 
 }

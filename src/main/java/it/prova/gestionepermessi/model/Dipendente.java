@@ -97,6 +97,13 @@ public class Dipendente {
 		this.dataAssunzione = dataAssunzione;
 		this.sesso = sesso;
 	}
+	
+
+	public Dipendente(String nome, String cognome) {
+		super();
+		this.nome = nome;
+		this.cognome = cognome;
+	}
 
 	public Long getId() {
 		return id;
