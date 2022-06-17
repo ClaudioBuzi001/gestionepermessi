@@ -80,7 +80,7 @@
 			        </div>
 			        <h2>Ricerca Dipendenti</h2>
 			        <p>Ricerca Tra i Dipendenti della tua Azienda.</p>
-			        <a href="${pageContext.request.contextPath}/dipenenti/search" class="icon-link">
+			        <a href="${pageContext.request.contextPath}/dipenente/search" class="icon-link">
 			          Vai alla funzionalità
 			          <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
 			        </a>

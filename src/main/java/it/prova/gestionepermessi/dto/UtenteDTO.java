@@ -60,6 +60,12 @@ public class UtenteDTO {
 		this.username = username;
 		this.stato = stato;
 	}
+	
+
+	public UtenteDTO(Long id) {
+		super();
+		this.id = id;
+	}
 
 	public Long getId() {
 		return id;
@@ -157,8 +163,37 @@ public class UtenteDTO {
 			return UtenteDTO.buildUtenteDTOFromModel(utenteEntity);
 		}).collect(Collectors.toList());
 	}
+	
 	public boolean isAttivo() {
 		return this.stato != null && this.stato.equals(StatoUtente.ATTIVO);
 	}
 
+	public Utente buildUtenteModelEdit(boolean includeIdRoles) {
+		Utente result = new Utente(this.id);
+		
+		if (includeIdRoles && ruoliIds != null)
+			result.setRuoli(Arrays.asList(ruoliIds).stream().map(id -> new Ruolo(id)).collect(Collectors.toSet()));
+
+		return result;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

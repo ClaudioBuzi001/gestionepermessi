@@ -39,7 +39,7 @@
 			  
 			  <div class='card'>
 				    <div class='card-header'>
-				        <h5>Inserisci nuovo elemento</h5> 
+				        <h5>Modifica Utente</h5> 
 				    </div>
 				    <div class='card-body'>
 		
@@ -49,30 +49,6 @@
 							<form:form modelAttribute="edit_utente_attr" method="post" action="${pageContext.request.contextPath}/utente/update" novalidate="novalidate" class="row g-3">
 								<input type="hidden" name="id" value="${edit_utente_attr.id }">
 							
-								<div class="col-md-6">
-									<label for="nome" class="form-label">Nome <span class="text-danger">*</span></label>
-									<spring:bind path="nome">
-										<input type="text" name="nome" id="nome" class="form-control ${status.error ? 'is-invalid' : ''}" placeholder="Inserire il nome" value="${edit_utente_attr.nome }" required>
-									</spring:bind>
-									<form:errors  path="nome" cssClass="error_field" />
-								</div>
-								
-								<div class="col-md-6">
-									<label for="cognome" class="form-label">Cognome <span class="text-danger">*</span></label>
-									<spring:bind path="cognome">
-										<input type="text" name="cognome" id="cognome" class="form-control ${status.error ? 'is-invalid' : ''}" placeholder="Inserire il cognome" value="${edit_utente_attr.cognome }" required>
-									</spring:bind>
-									<form:errors  path="cognome" cssClass="error_field" />
-								</div>
-								<div class="col-md-6">
-									<label for="username" class="form-label">Username <span class="text-danger">*</span></label>
-									<spring:bind path="username">
-										<input type="text" class="form-control ${status.error ? 'is-invalid' : ''}" name="username" id="username" placeholder="Inserire Username" value="${edit_utente_attr.username }" required>
-									</spring:bind>
-									<form:errors  path="username" cssClass="error_field" />
-								</div>
-								 
-								
 								<%--  checkbox ruoli 	--%>
 								<%-- facendolo con i tag di spring purtroppo viene un po' spaginato quindi aggiungo class 'a mano'	--%>
 								<div class="col-md-6 form-check" id="ruoliDivId">

@@ -1,6 +1,7 @@
 package it.prova.gestionepermessi.dto;
 
 import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotBlank;
@@ -180,4 +181,24 @@ public class DipendenteDTO {
 		return result;
 	}
 
+
+	public static List<DipendenteDTO> createDipendenteDTOListFromModelList(List<Dipendente> modelListInput) {
+		return modelListInput.stream().map(dipendenteEntity -> {
+			return DipendenteDTO.buildDipendenteDTOFromModel(dipendenteEntity);
+		}).collect(Collectors.toList());
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

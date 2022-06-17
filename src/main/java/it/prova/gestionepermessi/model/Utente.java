@@ -91,6 +91,10 @@ public class Utente {
 
 	}
 
+	public Utente(Long id) {
+		this.id = id;
+	}
+
 	public Long getId() {
 		return id;
 	}

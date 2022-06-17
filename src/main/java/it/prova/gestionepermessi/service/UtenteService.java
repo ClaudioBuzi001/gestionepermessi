@@ -41,6 +41,8 @@ public interface UtenteService {
 	public void inserisciUtenteEDipendenteCollegandoli(Utente utente, Dipendente dipendente);
 	
 	public Utente caricaUtenteEager(Long id);
+	
+	public void aggiornaPerEdit(Utente utente);
 
 }
 

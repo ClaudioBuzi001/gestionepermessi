@@ -203,4 +203,18 @@ public class UtenteServiceImpl implements UtenteService {
 		return repository.findByIdEager(id).orElse(null);
 	}
 
+	@Override
+	public void aggiornaPerEdit(Utente utente) {
+		//Devo modificare solo i ruoli
+		Utente utenteReloaded = repository.findById(utente.getId()).orElse(null);
+		if (utenteReloaded == null)
+			throw new RuntimeException("Elemento non trovato");
+		utenteReloaded.setRuoli(utente.getRuoli());
+		repository.save(utenteReloaded);
+		
+		
+	}
+	
+	
+
 }
