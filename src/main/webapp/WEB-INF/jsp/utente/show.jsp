@@ -39,12 +39,12 @@
 					    	
 					    	<dl class="row">
 							  <dt class="col-sm-3 text-right">nome:</dt>
-							  <dd class="col-sm-9">${show_utente_attr.nome}</dd>
+							  <dd class="col-sm-9">${show_utente_attr.dipendente.nome}</dd>
 					    	</dl>
 					    	
 					    	<dl class="row">
 							  <dt class="col-sm-3 text-right">Cognome:</dt>
-							  <dd class="col-sm-9">${show_utente_attr.cognome}</dd>
+							  <dd class="col-sm-9">${show_utente_attr.dipendente.cognome}</dd>
 					    	</dl>
 					    	
 					    	<dl class="row">

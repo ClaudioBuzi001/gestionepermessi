@@ -57,6 +57,8 @@ public class UtenteServiceImpl implements UtenteService {
 		return repository.findByIdConRuoli(id).orElse(null);
 	}
 
+	// carica tutto
+
 	@Transactional
 	public void aggiorna(Utente utenteInstance) {
 		// deve aggiornare solo nome, cognome, username, ruoli
@@ -169,7 +171,7 @@ public class UtenteServiceImpl implements UtenteService {
 			if (example.getStato() != null)
 				predicates.add(cb.equal(root.get("stato"), example.getStato()));
 
-			if (example.getRuoliIds() != null && example.getRuoliIds().length > 0 )
+			if (example.getRuoliIds() != null && example.getRuoliIds().length > 0)
 				predicates.add(root.join("ruoli").in(Arrays.asList(example.getRuoliIds()).stream()
 						.map(id -> new Ruolo(id)).collect(Collectors.toSet())));
 
@@ -194,6 +196,11 @@ public class UtenteServiceImpl implements UtenteService {
 		repository.save(utente);
 		dipendenteService.inserisciNuovo(dipendente);
 
+	}
+
+	@Override
+	public Utente caricaUtenteEager(Long id) {
+		return repository.findByIdEager(id).orElse(null);
 	}
 
 }

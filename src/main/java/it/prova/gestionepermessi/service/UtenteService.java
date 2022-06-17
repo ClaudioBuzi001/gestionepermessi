@@ -39,6 +39,8 @@ public interface UtenteService {
 	public Page<Utente> findByExample(UtenteSearchDTO example, Integer pageNo, Integer pageSize, String sortBy) ;
 	
 	public void inserisciUtenteEDipendenteCollegandoli(Utente utente, Dipendente dipendente);
+	
+	public Utente caricaUtenteEager(Long id);
 
 }
 
