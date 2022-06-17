@@ -37,23 +37,19 @@
 			            <table class='table table-striped ' >
 			                <thead>
 			                    <tr>
-			                        <th>Nome</th>
-			                        <th>Cognome</th>
 			                        <th>Username</th>
 			                        <th>Stato</th>
 			                        <th>Azioni</th>
 			                    </tr>
 			                </thead>
 			                <tbody>
-			                	<c:forEach items="${utente_list_attribute }" var="utenteItem">
+			                	<c:forEach items="${utente_list_attribute}" var="utenteItem">
 									<tr>
-										<td>${utenteItem.nome }</td>
-										<td>${utenteItem.cognome }</td>
 										<td>${utenteItem.username }</td>
 										<td>${utenteItem.stato }</td>
 										<td>
 											<a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/utente/show/${utenteItem.id}">Visualizza</a>
-											<a class="btn  btn-sm btn-outline-primary ml-2 mr-2" href="${pageContext.request.contextPath}/utente/edit/${utenteItem.id }">Edit</a>
+											<a class="btn  btn-sm btn-outline-primary ml-2 mr-2" href="${pageContext.request.contextPath}/utente/edit/${utenteItem.id}">Edit</a>
 											<a id="changeStatoLink_#_${utenteItem.id }" class="btn btn-outline-${utenteItem.isAttivo()?'danger':'success'} btn-sm link-for-modal" data-bs-toggle="modal" data-bs-target="#confirmOperationModal"  >${utenteItem.isAttivo()?'Disabilita':'Abilita'}</a>
 											<a id="resetPasswordLink_#_${utenteItem.id}" class="btn btn-outline-success btn-sm link-for-modal" data-bs-toggle="modal" data-bs-target="#confirmOperationModalPassword"  >Reset Password</a>
 										</td>

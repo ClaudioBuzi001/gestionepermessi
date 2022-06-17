@@ -16,7 +16,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "utente")
@@ -76,6 +78,17 @@ public class Utente {
 		this.password = password;
 		this.dateCreated = dateCreated;
 		this.stato = stato;
+	}
+
+	public Utente(Long id, String username, String password, Date dateCreated, StatoUtente stato,
+			Dipendente dipendente) {
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.dateCreated = dateCreated;
+		this.stato = stato;
+		this.dipendente = dipendente;
+
 	}
 
 	public Long getId() {

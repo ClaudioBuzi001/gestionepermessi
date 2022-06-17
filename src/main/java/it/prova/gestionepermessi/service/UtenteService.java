@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 
+import it.prova.gestionepermessi.dto.UtenteSearchDTO;
 import it.prova.gestionepermessi.model.Dipendente;
 import it.prova.gestionepermessi.model.Utente;
 
@@ -35,7 +36,7 @@ public interface UtenteService {
 	
 	public int modificaPassword(Long idUtente, String vecchiaPassword, String nuovaPassword, String nuovaPasswordConferma);
 
-	public Page<Utente> findByExample(Utente example, Integer pageNo, Integer pageSize, String sortBy) ;
+	public Page<Utente> findByExample(UtenteSearchDTO example, Integer pageNo, Integer pageSize, String sortBy) ;
 	
 	public void inserisciUtenteEDipendenteCollegandoli(Utente utente, Dipendente dipendente);
 

@@ -9,7 +9,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import it.prova.gestionepermessi.model.Ruolo;
 import it.prova.gestionepermessi.model.StatoUtente;
+import it.prova.gestionepermessi.model.Utente;
 
 
 
@@ -35,18 +37,28 @@ public class UtenteDTO {
 
 	private Long[] ruoliIds;
 
-	@NotNull(message = "{dipendente.notnull}")
+//	@NotNull(message = "{dipendente.notnull}")
 	private DipendenteDTO dipendenteDTO;
 
 	public UtenteDTO() {
 	}
 
-	public UtenteDTO(Long id, String username, String nome, String cognome, StatoUtente stato, DipendenteDTO dipendenteDTO) {
+	public UtenteDTO(Long id, String username, StatoUtente stato, Date dateCreated, DipendenteDTO dipendenteDTO) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.stato = stato;
 		this.dipendenteDTO = dipendenteDTO;
+	}
+
+
+	
+	
+	public UtenteDTO(Long id, String username,  StatoUtente stato) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.stato = stato;
 	}
 
 	public Long getId() {
@@ -117,32 +129,36 @@ public class UtenteDTO {
 	
 	
 	//TODO IMPLEMENTARE I METODI
-//	public Utente buildUtenteModel(boolean includeIdRoles) {
-//		Utente result = new Utente(this.id, this.username, this.password, this.dateCreated,
-//				this.stato, this.dipendenteDTO.buildModelFromDTO());
-//		if (includeIdRoles && ruoliIds != null)
-//			result.setRuoli(Arrays.asList(ruoliIds).stream().map(id -> new Ruolo(id)).collect(Collectors.toSet()));
-//
-//		return result;
-//	}
-//
-//	// niente password...
-//	public static UtenteDTO buildUtenteDTOFromModel(Utente utenteModel) {
-//		UtenteDTO result = new UtenteDTO(utenteModel.getId(), utenteModel.getUsername(), utenteModel.getNome(),
-//				utenteModel.getCognome(), utenteModel.getStato());
-//
-//		if (!utenteModel.getRuoli().isEmpty())
-//			result.ruoliIds = utenteModel.getRuoli().stream().map(r -> r.getId()).collect(Collectors.toList())
-//					.toArray(new Long[] {});
-//
-//		return result;
-//	}
-	
-//	public static List<UtenteDTO> createUtenteDTOListFromModelList(List<Utente> modelListInput) {
-//		return modelListInput.stream().map(utenteEntity -> {
-//			return UtenteDTO.buildUtenteDTOFromModel(utenteEntity);
-//		}).collect(Collectors.toList());
-//	}
+	public Utente buildUtenteModel(boolean includeIdRoles) {
+		Utente result = new Utente(this.id, this.username, this.password, this.dateCreated,
+				this.stato, this.dipendenteDTO.buildModelFromDTO());
+		
+		if (includeIdRoles && ruoliIds != null)
+			result.setRuoli(Arrays.asList(ruoliIds).stream().map(id -> new Ruolo(id)).collect(Collectors.toSet()));
 
+		return result;
+	}
+//
+	// niente password...
+	//Costruisco un utenteDTO con ruoli e anche con dipendente
+	public static UtenteDTO buildUtenteDTOFromModel(Utente utenteModel) {
+		UtenteDTO result = new UtenteDTO(utenteModel.getId(), utenteModel.getUsername(), utenteModel.getStato());
+
+		
+		if (!utenteModel.getRuoli().isEmpty())
+			result.ruoliIds = utenteModel.getRuoli().stream().map(r -> r.getId()).collect(Collectors.toList())
+					.toArray(new Long[] {});
+
+		return result;
+	}
+	
+	public static List<UtenteDTO> createUtenteDTOListFromModelList(List<Utente> modelListInput) {
+		return modelListInput.stream().map(utenteEntity -> {
+			return UtenteDTO.buildUtenteDTOFromModel(utenteEntity);
+		}).collect(Collectors.toList());
+	}
+	public boolean isAttivo() {
+		return this.stato != null && this.stato.equals(StatoUtente.ATTIVO);
+	}
 
 }

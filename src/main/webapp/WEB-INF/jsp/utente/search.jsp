@@ -44,11 +44,11 @@
 			
 			<div class='card'>
 			    <div class='card-header'>
-			        <h5>Ricerca elementi</h5> 
+			        <h5>Ricerca utenti</h5> 
 			    </div>
 			    <div class='card-body'>
 	
-						<form  method="post" action="${pageContext.request.contextPath}/utente/listUtenti" class="row g-3">
+						<form  method="post" action="${pageContext.request.contextPath}/utente/list" class="row g-3">
 						
 							<div class="col-md-6">
 								<label for="nome" class="form-label">Nome</label>
@@ -63,11 +63,6 @@
 							<div class="col-md-6">
 								<label for="username" class="form-label">Username</label>
 								<input type="text" class="form-control" name="username" id="username" placeholder="Inserire username" >
-							</div>
-							<div class="col-md-6">
-								<label for="dateCreated" class="form-label">Data di Creazione</label>
-                        		<input class="form-control" id="dateCreated" type="date" placeholder="dd/MM/yy"
-                            		title="formato : gg/mm/aaaa"  name="dateCreated" >
 							</div>
 							
 							<div class="col-md-3">
@@ -88,7 +83,7 @@
 										<div class='form-check'>
 											 <input name="ruoliIds" class="form-check-input" type="checkbox" value="${ruoloItem.id }" id="flexCheckDefault-${ruoloItem.id }">
 											  <label class="form-check-label" for="flexCheckDefault-${ruoloItem.id }">
-											   ${ruoloItem.codice }
+											   ${ruoloItem.codice}
 											  </label>
 										</div>
 									</c:forEach>
