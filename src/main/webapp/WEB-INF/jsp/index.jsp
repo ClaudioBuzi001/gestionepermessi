@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!doctype html>
 <html lang="it" class="h-100" >
 	 <head>
@@ -51,10 +52,15 @@
 			     <div class="p-5 mb-4 bg-light rounded-3">
 				      <div class="container-fluid py-5">
 				        <h1 class="display-5 fw-bold">Benvenuto alla Gestione Permessi</h1>
+				        <sec:authorize access="hasRole('ADMIN')">
 				        <p class="col-md-8 fs-4">Benvenuto nella Sezione Admin, qui potrai Gestire le tue utenze e ricercare tra tutti i dipendenti! </p>
 				        <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/utente/search">Vai alla Ricerca di Utente</a>
 				     	<a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/dipendente/search">Vai alla Ricerca dei Dipendenti</a>
-				      </div>
+				     	</sec:authorize>	
+				     	<sec:authorize access="hasRole('BO_USER')">
+				     	<a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/dipendente/search">Vai alla gestione di Dipendenti</a>
+				     	</sec:authorize>
+				     </div>
 			    </div>
 			    
 			  </div>

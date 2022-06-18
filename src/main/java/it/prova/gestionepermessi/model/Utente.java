@@ -90,6 +90,11 @@ public class Utente {
 		this.dipendente = dipendente;
 
 	}
+	
+	public Utente(@NotNull Dipendente dipendente) {
+		super();
+		this.dipendente = dipendente;
+	}
 
 	public Utente(Long id) {
 		this.id = id;

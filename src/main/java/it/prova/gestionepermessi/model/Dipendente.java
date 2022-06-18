@@ -43,7 +43,7 @@ public class Dipendente {
 	private SessoDipendente sesso;
 
 	@OneToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "utente_id", referencedColumnName = "id") //FIXME Forse da togliere
+	@JoinColumn(name = "utente_id", referencedColumnName = "id") // FIXME Forse da togliere
 	private Utente utente;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "dipendente")
@@ -97,13 +97,36 @@ public class Dipendente {
 		this.dataAssunzione = dataAssunzione;
 		this.sesso = sesso;
 	}
+
+	public Dipendente(String nome, String cognome, String codiceFiscale, Date dataNascita, Date dataAssunzione,
+			SessoDipendente sesso) {
+		super();
+		this.nome = nome;
+		this.cognome = cognome;
+		this.codiceFiscale = codiceFiscale;
+		this.dataNascita = dataNascita;
+		this.dataAssunzione = dataAssunzione;
+		this.sesso = sesso;
+	}
 	
+	public Dipendente(Long id, String nome, String cognome, String codiceFiscale, Date dataNascita, Date dataAssunzione,
+			SessoDipendente sesso) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.cognome = cognome;
+		this.codiceFiscale = codiceFiscale;
+		this.dataNascita = dataNascita;
+		this.dataAssunzione = dataAssunzione;
+		this.sesso = sesso;
+	}
 
 	public Dipendente(String nome, String cognome) {
 		super();
 		this.nome = nome;
 		this.cognome = cognome;
 	}
+	
 
 	public Long getId() {
 		return id;

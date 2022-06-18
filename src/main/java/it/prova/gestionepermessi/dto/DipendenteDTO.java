@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import it.prova.gestionepermessi.model.Dipendente;
 import it.prova.gestionepermessi.model.SessoDipendente;
-import it.prova.gestionepermessi.model.Utente;
 
 public class DipendenteDTO {
 
@@ -22,9 +22,8 @@ public class DipendenteDTO {
 	@NotBlank(message = "{codiceFiscale.notblank}")
 	@Size(min = 16, max = 16, message = "Errore, la lunghezza del codice fiscale deve essere di 16")
 	private String codiceFiscale;
-	@NotBlank(message = "{email.notblank}")
 	private String email;
-	@NotBlank(message = "{dataNascita.notblank}")
+	@NotNull(message = "{dataNascita.notblank}")
 	private Date dataNascita;
 	private Date dataAssunzione;
 	private SessoDipendente sesso;
@@ -166,7 +165,13 @@ public class DipendenteDTO {
 	}
 
 	public Dipendente buildModelFromDTO() {
-		return null;
+		Dipendente model = new Dipendente(this.id,this.nome,this.cognome,this.codiceFiscale, this.dataNascita, this.dataAssunzione, this.sesso);
+		
+		//setto l email con le specifiche
+		String email = this.getNome().charAt(0) + "."+ this.getCognome()+ "@prova.it";
+		model.setEmail(email);
+		
+		return model;
 	}
 
 	public static DipendenteDTO buildDipendenteDTOFromModel(Dipendente dipendenteModel) {
@@ -188,6 +193,7 @@ public class DipendenteDTO {
 		}).collect(Collectors.toList());
 	}
 	
+
 	
 	
 	
