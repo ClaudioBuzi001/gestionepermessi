@@ -101,6 +101,14 @@ public class UtenteController {
 		utenteService.changeUserAbilitation(idUtente);
 		return "redirect:/utente";
 	}
+	
+	@PostMapping("/resetPassword")
+	public String resetPassword(@RequestParam(name = "idUtenteForResetpassword", required = true) Long idUtente, RedirectAttributes redirectAttr) {
+		utenteService.resetPasswordService(idUtente);
+		
+		redirectAttr.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
+		return "redirect:/utente";
+	}
 
 }
 
