@@ -161,6 +161,21 @@ public class RichiestaPermessoController {
 		return "richiestaPermesso/show";
 	}
 
+	@GetMapping("/delete/{idRichiesta}")
+	public String delete(@PathVariable(required = true) Long idRichiesta, Model model) {
+		model.addAttribute("delete_richiesta_attr", richiesteService.caricaSingolaEager(idRichiesta));
+		return "richiestaPermesso/delete";
+	}
+	
+	
+	@PostMapping("/remove")
+	public String remove(@RequestParam(required = true) Long idRichiesta, RedirectAttributes redirectAttrs) {
+		
+		richiesteService.rimuoviPerId(idRichiesta);
+		
+		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
+		return "redirect:/richiestaPermesso";
+	}
 
 }
 

@@ -32,4 +32,6 @@ public interface RichiestePermessoService {
 	public void inserisciRichiestaEGeneraMessaggio(RichiestePermesso richiesta);
 	
 	public RichiestePermesso caricaSingolaEager(Long id);
+	
+	public void rimuoviPerId(Long id);
 }

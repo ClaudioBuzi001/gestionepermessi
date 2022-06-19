@@ -19,4 +19,10 @@ public class AttachmentServiceImpl implements AttachmentService {
 		return repository.save(attachment);
 	}
 
+	@Override
+	@Transactional
+	public void rimuovi(Attachment attachment) {
+		repository.delete(attachment);
+	}
+
 }

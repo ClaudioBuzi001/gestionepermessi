@@ -60,8 +60,10 @@
 										<td>${richiestaItem.codiceCertificato}</td>
 										<td>
 											<a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/richiestaPermesso/show/${richiestaItem.id}">Visualizza</a>
-											
 											<a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/richiestaPermesso/edit/${richiestaItem.id}">Modifica</a>
+											<c:if test="${richiestaItem.approvato != true}">
+												<a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/richiestaPermesso/delete/${richiestaItem.id}">Elimina</a>
+											</c:if>
 										</td>
 									</tr>
 								</c:forEach>

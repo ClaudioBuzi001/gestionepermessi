@@ -16,6 +16,6 @@ public interface RichiestePermessoRepository extends CrudRepository<RichiestePer
 	
 	List<RichiestePermesso> findByDipendente_id(Long id);
 
-	@Query("select r from RichiestePermesso r join fetch r.dipendente join fetch r.attachment where r.id = ?1")
+	@Query("select r from RichiestePermesso r join fetch r.dipendente d join fetch d.richiestePermesso join fetch r.attachment where r.id = ?1")
 	RichiestePermesso findByIdEager(Long id);
 }

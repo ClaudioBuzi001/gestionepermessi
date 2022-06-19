@@ -18,6 +18,18 @@ public class MessaggioServiceImpl implements MessaggioService {
 	public void inserisciNuovo(Messaggio messaggio) {
 		messaggioRepository.save(messaggio);
 	}
+
+	@Override
+	@Transactional
+	public Messaggio caricaPerIdRichiesta(Long id) {
+		return messaggioRepository.findByRichiestaPermesso_id(id);
+	}
+
+	@Override
+	@Transactional
+	public void rimuovi(Messaggio messaggio) {
+		messaggioRepository.delete(messaggio);
+	}
 	
 }
 

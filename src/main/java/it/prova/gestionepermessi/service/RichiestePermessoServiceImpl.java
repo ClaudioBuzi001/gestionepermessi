@@ -21,6 +21,7 @@ import it.prova.gestionepermessi.dto.RichiestaPermessoDTO;
 import it.prova.gestionepermessi.model.Messaggio;
 import it.prova.gestionepermessi.model.RichiestePermesso;
 import it.prova.gestionepermessi.model.TipoPermesso;
+import it.prova.gestionepermessi.repository.AttachmentRepository;
 import it.prova.gestionepermessi.repository.DipendenteRepository;
 import it.prova.gestionepermessi.repository.MessaggioRepository;
 import it.prova.gestionepermessi.repository.RichiestePermessoRepository;
@@ -36,6 +37,9 @@ public class RichiestePermessoServiceImpl implements RichiestePermessoService {
 
 	@Autowired
 	private MessaggioRepository messaggioRepository;
+	
+	@Autowired
+	private AttachmentRepository attachmentRepository;
 
 	@Override
 	@Transactional(readOnly = true)
@@ -153,8 +157,61 @@ public class RichiestePermessoServiceImpl implements RichiestePermessoService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public RichiestePermesso caricaSingolaEager(Long id) {
 		return repository.findByIdEager(id);
 	}
 
+	@Override
+	@Transactional
+	public void rimuoviPerId(Long id) {
+		//Mi carico la richiesta, prendo il dipendente e dissocio il dipendente e la richiesta caricata, dissocio la richiesta dal dipendente
+		RichiestePermesso daEliminare = repository.findByIdEager(id);
+		
+		for(RichiestePermesso richiestaItem : daEliminare.getDipendente().getRichiestePermesso()) {
+			if(richiestaItem.getId() == id) 
+				daEliminare.getDipendente().getRichiestePermesso().remove(richiestaItem);
+		}
+		//Prendo l attachement dalla richiesta
+		
+		attachmentRepository.delete(daEliminare.getAttachment());
+		
+		//Prendo il messaggio dissocio la richiesta dal messaggio e elimino il messaggio
+		Messaggio messaggio = messaggioRepository.findByRichiestaPermesso_id(id);
+		
+		messaggioRepository.delete(messaggio);
+		
+		//Elimino la richiesta
+		repository.delete(daEliminare);
+		
+	}
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

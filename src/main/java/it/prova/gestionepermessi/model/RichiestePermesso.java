@@ -43,7 +43,7 @@ public class RichiestePermesso {
 	@JoinColumn(name = "attachment_id", referencedColumnName = "id")
 	private Attachment attachment;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)	
 	@JoinColumn(name = "dipendente_id", referencedColumnName = "id", nullable = false)
 	private Dipendente dipendente;
 
