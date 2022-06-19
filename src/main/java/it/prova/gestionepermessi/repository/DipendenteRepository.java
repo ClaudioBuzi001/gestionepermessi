@@ -14,10 +14,12 @@ import it.prova.gestionepermessi.model.Utente;
 
 
 public interface DipendenteRepository extends CrudRepository<Dipendente, Long>{
-
-	Page<Dipendente> findAll(Specification<Utente> specificationCriteria, Pageable paging);
 	
 	@Query("select d from Dipendente d join fetch d.utente where d.id = ?1")
 	Optional<Dipendente> findByIdWithUtente(Long id);
+
+	Page<Dipendente> findAll(Specification<Dipendente> specificationCriteria, Pageable paging);
+	
+	Dipendente findByUtente_username(String username);
 
 }

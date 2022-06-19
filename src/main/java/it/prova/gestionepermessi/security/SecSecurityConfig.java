@@ -40,7 +40,7 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
          .antMatchers("/login").permitAll()
          .antMatchers("/admin/**").hasRole("ADMIN")
          .antMatchers("/dipendente/**").hasRole("BO_USER")
-         .antMatchers("/dipendente").hasRole("DIPENDENTE_USER")
+         .antMatchers("/richiestaPermesso/**").hasRole("DIPENDENTE_USER")
          .antMatchers("/**").hasAnyRole("ADMIN", "DIPENDENTE_USER","BO_USER")
          //.antMatchers("/anonymous*").anonymous()
          .anyRequest().authenticated()

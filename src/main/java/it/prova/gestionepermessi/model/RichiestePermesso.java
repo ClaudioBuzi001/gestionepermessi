@@ -75,6 +75,31 @@ public class RichiestePermesso {
 		this.attachment = attachment;
 		this.dipendente = dipendete;
 	}
+	
+
+	public RichiestePermesso(Long id, Date dataInizio, Date dataFine, boolean approvato, String codiceCertificato, String note,
+			TipoPermesso tipoPermesso, Attachment attachment) {
+		super();
+		this.id = id;
+		this.tipoPermesso = tipoPermesso;
+		this.dataInizio = dataInizio;
+		this.dataFine = dataFine;
+		this.approvato = approvato;
+		this.codiceCertificato = codiceCertificato;
+		this.note = note;
+		this.attachment = attachment;
+	}
+
+	public RichiestePermesso(Long id, Date dataInizio, Date dataFine, Boolean approvato, String codiceCertificato,
+			String note) {
+		super();
+		this.id = id;
+		this.dataInizio = dataInizio;
+		this.dataFine = dataFine;
+		this.approvato = approvato;
+		this.codiceCertificato = codiceCertificato;
+		this.note = note;
+	}
 
 	public Long getId() {
 		return id;

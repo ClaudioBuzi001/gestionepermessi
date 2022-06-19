@@ -31,4 +31,5 @@ public interface DipendenteService {
 	
 	public void modificaDipendente(Dipendente dipendenteInstance);
 
+	public Dipendente trovaPerUsername(String usernames);
 }

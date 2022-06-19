@@ -82,7 +82,7 @@ public class DipendenteServiceImpl implements DipendenteService {
 	@Transactional
 	public Page<Dipendente> findByExample(DipendenteSearchDTO example, Integer pageNo, Integer pageSize,
 			String sortBy) {
-		Specification<Utente> specificationCriteria = (root, query, cb) -> {
+		Specification<Dipendente> specificationCriteria = (root, query, cb) -> {
 
 //			Nome congome, codiceFiscale, email, data nascita data assunzinoe
 
@@ -170,6 +170,11 @@ public class DipendenteServiceImpl implements DipendenteService {
 
 		
 		
+	}
+
+	@Override
+	public Dipendente trovaPerUsername(String usernames) {
+		return repository.findByUtente_username(usernames);
 	}
 
 }
