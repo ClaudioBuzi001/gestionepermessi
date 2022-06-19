@@ -147,7 +147,7 @@ public class RichiestePermessoServiceImpl implements RichiestePermessoService {
 		if (richiesta.getTipoPermesso().equals(TipoPermesso.MALATTIA))
 			test += " Codice Certificato: " + richiesta.getCodiceCertificato();
 
-		test += " " + richiesta.getNote();
+		test += " Note: " + richiesta.getNote();
 
 		result.setOggetto(oggetto);
 		result.setTesto(test);

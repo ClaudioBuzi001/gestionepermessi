@@ -76,21 +76,9 @@
 			        <div class="feature-icon bg-primary bg-gradient">
 			          <svg class="bi" width="1em" height="1em"><use xlink:href="#collection"/></svg>
 			        </div>
-			        <h2>Ricerca Utenti</h2>
-			        <p>Ricerca tra gli utenti!</p>
-			        <a href="${pageContext.request.contextPath}/utente/search" class="icon-link">
-			          Vai alla funzionalità
-			          <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
-			        </a>
-			      </div>
-			    
-			      <div class="feature col">
-			        <div class="feature-icon bg-primary bg-gradient">
-			          <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"/></svg>
-			        </div>
-			        <h2>Ricerca Dipendenti</h2>
-			        <p>Ricerca Tra i Dipendenti della tua Azienda.</p>
-			        <a href="${pageContext.request.contextPath}/dipenente/search" class="icon-link">
+			        <h2>Ricerca Messaggi</h2>
+			        <p>Ricerca tra I messaggi</p>
+			        <a href="${pageContext.request.contextPath}/messaggio" class="icon-link">
 			          Vai alla funzionalità
 			          <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"/></svg>
 			        </a>

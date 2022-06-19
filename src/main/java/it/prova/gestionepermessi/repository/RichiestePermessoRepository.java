@@ -21,10 +21,10 @@ public interface RichiestePermessoRepository extends CrudRepository<RichiestePer
 	RichiestePermesso findByIdEager(Long id);
 	
 	@Modifying
-	@Query("update RichiestePermesso r set approvato = true where r.id = ?1")
+	@Query("update RichiestePermesso r set r.approvato = true where r.id = ?1")
 	void approva(Long id);
 	
 	@Modifying
-	@Query("update RichiestePermesso r set approvato = false where r.id = ?1")
+	@Query("update RichiestePermesso r set r.approvato = false where r.id = ?1")
 	void rifuta(Long id);
 }

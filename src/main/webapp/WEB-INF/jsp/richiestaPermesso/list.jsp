@@ -27,7 +27,7 @@
 			
 			<div class='card'>
 			    <div class='card-header'>
-			        <h5>Lista dei Dipendenti</h5> 
+			        <h5>Lista delle Richieste Di Permesso</h5> 
 			    </div>
 			    <div class='card-body'>
 			    	<a href="${pageContext.request.contextPath}/richiestaPermesso/search" class='btn btn-outline-secondary' >
