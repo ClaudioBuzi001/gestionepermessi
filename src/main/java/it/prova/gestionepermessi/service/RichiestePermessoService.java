@@ -30,4 +30,6 @@ public interface RichiestePermessoService {
 	public List<RichiestePermesso> findMyRichiestePermesso(String username);
 	
 	public void inserisciRichiestaEGeneraMessaggio(RichiestePermesso richiesta);
+	
+	public RichiestePermesso caricaSingolaEager(Long id);
 }

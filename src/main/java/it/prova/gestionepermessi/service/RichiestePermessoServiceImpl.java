@@ -152,4 +152,9 @@ public class RichiestePermessoServiceImpl implements RichiestePermessoService {
 		return result;
 	}
 
+	@Override
+	public RichiestePermesso caricaSingolaEager(Long id) {
+		return repository.findByIdEager(id);
+	}
+
 }
