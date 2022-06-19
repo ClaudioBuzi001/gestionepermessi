@@ -59,6 +59,7 @@
 				     	</sec:authorize>	
 				     	<sec:authorize access="hasRole('BO_USER')">
 				     	<a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/dipendente/search">Vai alla gestione di Dipendenti</a>
+				     	<a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/richiestaPermesso/listBO">Vai alla ricerca Richieste Permesso</a>
 				     	</sec:authorize>
 				     	<sec:authorize access="hasRole('DIPENDENTE_USER')">
 				     	<a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/richiestaPermesso">Vai alla gestione di Richieste Permesso</a>

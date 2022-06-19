@@ -186,6 +186,18 @@ public class RichiestePermessoServiceImpl implements RichiestePermessoService {
 		
 	}
 
+	@Override
+	@Transactional
+	public void approva(Long id) {
+		repository.approva(id);
+	}
+
+	@Override
+	@Transactional
+	public void rifuta(Long id) {
+		repository.rifuta(id);
+	}
+
 }
 
 

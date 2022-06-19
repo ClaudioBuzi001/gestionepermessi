@@ -82,23 +82,6 @@ public class RichiestaPermessoController {
 		return "richiestaPermesso/list";
 	}
 
-//	-metodo insert
-//
-//	1)gli passo un nuovo richiestapermessoDTO
-//		Che dentro ha tutto quello che ci serve
-//
-//-Insert.jsp
-//	Metto tutti i campi intererssati
-//
-//-save
-//	Binding
-//
-//	Controlli
-//
-//	Salvo la richiesta
-//	
-//	Mi creo un messaggio, che conterra l id di tale richiesta
-
 	@GetMapping("/insert")
 	public String create(Model model) {
 		model.addAttribute("insert_richiesta_attr", new RichiestaPermessoDTO());
@@ -111,14 +94,9 @@ public class RichiestaPermessoController {
 	public String save(@Valid @ModelAttribute("insert_richiesta_attr") RichiestaPermessoDTO richiestaDTO,
 			BindingResult result, Model model, RedirectAttributes redirectAttrs) {
 
-		System.out.println("SONO QUI");
-		// Controlli
-		// data inizio < data fine
 		if (richiestaDTO.getDataFine() != null && richiestaDTO.getDataInizio().after(richiestaDTO.getDataFine()))
 			result.rejectValue("dataInizio", null,
 					"Errore, la data di Inzio del permesso è dopo la data Di Fine, CORREGGERE:");
-
-		System.out.println("Prima del result.hasErrr");
 
 		if (result.hasErrors() ) {
 			if(richiestaDTO.getAttachment().getNomeFile() == null) {
@@ -129,8 +107,7 @@ public class RichiestaPermessoController {
 
 			
 		Attachment myAttachment = null;
-		System.out.println("CIAO AMICO");
-		// Se Ci sta l attachement carichiamo anche quello
+
 		if (richiestaDTO.getAttachment() != null && richiestaDTO.getAttachment().getNomeFile() != null && richiestaDTO.getAttachment().getNomeFile().length() > 3) {
 			myAttachment = attachmentService.inserisciNuovo(richiestaDTO.getAttachment().buildAttachementFromDTO());
 		}
@@ -176,6 +153,48 @@ public class RichiestaPermessoController {
 		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
 		return "redirect:/richiestaPermesso";
 	}
+	
+	
+	@GetMapping("/searchBO")
+	public String searchDipendenteBO(Model model) {
+		model.addAttribute("search_richiestapermesso_dipendente_attr", DipendenteDTO.createDipendenteDTOListFromModelList(dipendenteService.listAllDipendenti()));
+		return "richiestaPermesso/searchBO";
+	}
+	
+	@GetMapping("/listBO")
+	public ModelAndView listAllDipendentiBO() {
+		ModelAndView mv = new ModelAndView();
+		List<RichiestePermesso> richieste = richiesteService.listAllRichiestePermesso();
+		mv.addObject("richieste_list_attribute", richieste);
+		mv.setViewName("richiestaPermesso/list");
+		return mv;
+	}
+
+	@GetMapping("/showBO/{idRichiesta}")
+	public String showBO(@PathVariable(required = true) Long idRichiesta, Model model) {
+		model.addAttribute("show_richiesta_attr", richiesteService.caricaSingolaEager(idRichiesta));
+		return "richiestaPermesso/showBO";
+	}
+	
+	
+	@PostMapping("/approva")
+	public String approva(@RequestParam(required = true) Long idRichiesta, RedirectAttributes redirectAttrs) {
+		
+		richiesteService.approva(idRichiesta);
+		
+		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
+		return "redirect:/richiestaPermesso/listBO";
+	}
+	
+	@PostMapping("/rifiuta")
+	public String rifuta(@RequestParam(required = true) Long idRichiesta, RedirectAttributes redirectAttrs) {
+		
+		richiesteService.rifuta(idRichiesta);
+		
+		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
+		return "redirect:/richiestaPermesso/listBO";
+	}
+	
 
 }
 

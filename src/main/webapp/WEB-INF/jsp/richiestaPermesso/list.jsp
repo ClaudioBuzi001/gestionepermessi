@@ -33,10 +33,11 @@
 			    	<a href="${pageContext.request.contextPath}/richiestaPermesso/search" class='btn btn-outline-secondary' >
 				            <i class='fa fa-chevron-left'></i> Torna alla Ricerca
 				        </a>
-				    
+				    <sec:authorize access="hasRole('DIPENDENTE_USER')">
 				      <a href="${pageContext.request.contextPath}/richiestaPermesso/insert" class='btn btn-outline-secondary' >
 				            <i class='fa fa-chevron-left'></i> Add New
 				        </a>
+				       </sec:authorize>
 			    
 			        <div class='table-responsive'>
 			            <table class='table table-striped ' >
@@ -59,11 +60,17 @@
 										<td>${richiestaItem.approvato}</td>
 										<td>${richiestaItem.codiceCertificato}</td>
 										<td>
-											<a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/richiestaPermesso/show/${richiestaItem.id}">Visualizza</a>
-											<a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/richiestaPermesso/edit/${richiestaItem.id}">Modifica</a>
-											<c:if test="${richiestaItem.approvato != true}">
-												<a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/richiestaPermesso/delete/${richiestaItem.id}">Elimina</a>
-											</c:if>
+											<sec:authorize access="hasRole('DIPENDENTE_USER')">
+												<a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/richiestaPermesso/show/${richiestaItem.id}">Visualizza</a>
+												<a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/richiestaPermesso/edit/${richiestaItem.id}">Modifica</a>
+												<c:if test="${richiestaItem.approvato != true}">
+													<a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/richiestaPermesso/delete/${richiestaItem.id}">Elimina</a>
+												</c:if>
+											</sec:authorize>
+											<sec:authorize access="hasRole('BO_USER')">
+												<a class="btn btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/richiestaPermesso/showBO/${richiestaItem.id}">Visualizza</a>
+											</sec:authorize>
+											
 										</td>
 									</tr>
 								</c:forEach>
