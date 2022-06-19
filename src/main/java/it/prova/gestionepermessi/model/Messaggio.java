@@ -25,7 +25,7 @@ public class Messaggio {
 	@Column(name = "oggetto")
 	private String oggetto;
 	@Column(name = "letto")
-	private Boolean letto;
+	private Boolean letto = false;
 	@Column(name = "dataInserimento")
 	private Date dataInserimento;
 	@Column(name = "dataLettura")
@@ -59,6 +59,12 @@ public class Messaggio {
 		this.letto = letto;
 		this.dataInserimento = dataInserimento;
 		this.dataLettura = dataLettura;
+		this.richiestaPermesso = richiestaPermesso;
+	}
+	
+
+	public Messaggio(RichiestePermesso richiestaPermesso) {
+		super();
 		this.richiestaPermesso = richiestaPermesso;
 	}
 

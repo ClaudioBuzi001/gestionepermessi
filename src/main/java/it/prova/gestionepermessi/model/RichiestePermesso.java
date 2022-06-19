@@ -2,6 +2,7 @@ package it.prova.gestionepermessi.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -14,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name = "richiestapermesso")
@@ -31,13 +33,13 @@ public class RichiestePermesso {
 	@Column(name = "dataFine")
 	private Date dataFine;
 	@Column(name = "approvato")
-	private Boolean approvato;
+	private Boolean approvato = false;
 	@Column(name = "codiceCertificato")
 	private String codiceCertificato;
 	@Column(name = "note")
 	private String note;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "attachment_id", referencedColumnName = "id")
 	private Attachment attachment;
 

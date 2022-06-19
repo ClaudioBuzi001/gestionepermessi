@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.constraints.NotNull;
+
 import it.prova.gestionepermessi.model.Attachment;
 import it.prova.gestionepermessi.model.Dipendente;
 import it.prova.gestionepermessi.model.RichiestePermesso;
@@ -13,16 +15,18 @@ public class RichiestaPermessoDTO {
 
 	private Long id;
 
+	@NotNull(message = "{tipoPermesso.notnull}")
 	private TipoPermesso tipoPermesso;
+	@NotNull(message = "{dataInizio.notnull}")
 	private Date dataInizio;
 	private Date dataFine;
 	private Boolean approvato;
 	private String codiceCertificato;
 	private String note;
 
-	private AttachmentDTO attachment;
+	private AttachmentDTO attachment = new AttachmentDTO();
 
-	private DipendenteDTO dipendente;
+	private DipendenteDTO dipendente = new DipendenteDTO();
 
 	public RichiestaPermessoDTO() {
 		super();
@@ -169,7 +173,7 @@ public class RichiestaPermessoDTO {
 				richiestaPermessoModel.getTipoPermesso(), AttachmentDTO.buildAttachemntDTOFromModel(richiestaPermessoModel.getAttachment()));
 	}
 
-	public RichiestePermesso buildRichiestaPermessoFromModel() {
+	public RichiestePermesso buildRichiestaPermessoFromDTO() {
 		return new RichiestePermesso(this.id, this.dataInizio, this.dataFine, false, this.codiceCertificato, this.note,
 				this.tipoPermesso, this.attachment.buildAttachementFromDTO());
 	}

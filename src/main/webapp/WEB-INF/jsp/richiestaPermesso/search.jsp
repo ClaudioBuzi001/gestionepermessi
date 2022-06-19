@@ -62,10 +62,6 @@
                             			title="formato : gg/mm/aaaa"  name="dataFine">
 							</div>
 								
-								<div class="col-md-12">
-									  <input class="form-check-input" type="checkbox"  id="approvato" name="approvato">
-								  <label class="form-check-label" for="approvato">Approvato</label>
-								</div>
 			
 								<div >
 									<label for="note" class="form-label">Note</label>

@@ -1,11 +1,11 @@
 package it.prova.gestionepermessi.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +14,15 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import it.prova.gestionepermessi.dto.RichiestaPermessoDTO;
+import it.prova.gestionepermessi.model.Messaggio;
 import it.prova.gestionepermessi.model.RichiestePermesso;
+import it.prova.gestionepermessi.model.TipoPermesso;
 import it.prova.gestionepermessi.repository.DipendenteRepository;
+import it.prova.gestionepermessi.repository.MessaggioRepository;
 import it.prova.gestionepermessi.repository.RichiestePermessoRepository;
 
 @Service
@@ -30,12 +30,15 @@ public class RichiestePermessoServiceImpl implements RichiestePermessoService {
 
 	@Autowired
 	private DipendenteRepository dipendenteRepository;
-	
+
 	@Autowired
 	private RichiestePermessoRepository repository;
-	
-	
+
+	@Autowired
+	private MessaggioRepository messaggioRepository;
+
 	@Override
+	@Transactional(readOnly = true)
 	public List<RichiestePermesso> listAllRichiestePermesso() {
 		return (List<RichiestePermesso>) repository.findAll();
 	}
@@ -49,19 +52,20 @@ public class RichiestePermessoServiceImpl implements RichiestePermessoService {
 	@Override
 	public void aggiorna(RichiestePermesso richiestePermessoInstance) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
+	@Transactional
 	public void inserisciNuovo(RichiestePermesso richiestePermessoInstance) {
-		// TODO Auto-generated method stub
-		
+		repository.save(richiestePermessoInstance);
+
 	}
 
 	@Override
 	public void rimuovi(RichiestePermesso richiestePermessoInstance) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -81,9 +85,6 @@ public class RichiestePermessoServiceImpl implements RichiestePermessoService {
 
 			if (example.getDataFine() != null)
 				predicates.add(cb.greaterThanOrEqualTo(root.get("dataFine"), example.getDataFine()));
-			
-			if(example.isApprovato() == true || example.isApprovato() == false)
-				predicates.add(cb.equal(root.get("approvato"), example.isApprovato()));
 
 			if (StringUtils.isNotEmpty(example.getCodiceCertificato()))
 				predicates.add(cb.like(cb.upper(root.get("codiceCertificato")),
@@ -114,33 +115,41 @@ public class RichiestePermessoServiceImpl implements RichiestePermessoService {
 	@Override
 	@Transactional(readOnly = true)
 	public List<RichiestePermesso> findMyRichiestePermesso(String username) {
-	    return repository.findByDipendente_id(dipendenteRepository.findByUtente_username(username).getId());
+		return repository.findByDipendente_id(dipendenteRepository.findByUtente_username(username).getId());
+	}
+
+	@Override
+	@Transactional
+	public void inserisciRichiestaEGeneraMessaggio(RichiestePermesso richiesta) {
+		repository.save(richiesta);
+		messaggioRepository.save(creaMessaggio(richiesta));
+	}
+
+	private Messaggio creaMessaggio(RichiestePermesso richiesta) {
+		Messaggio result = new Messaggio(richiesta);
+
+		String oggetto = "Richiesta Di Permesso da parte di " + richiesta.getDipendente().getNome().toUpperCase() + " "
+				+ richiesta.getDipendente().getCognome().toUpperCase();
+
+		String test = "Il dipendente " + richiesta.getDipendente().getNome() + " "
+				+ richiesta.getDipendente().getCognome() + " ha richiesto un permesso per "
+				+ richiesta.getTipoPermesso() + " ";
+
+		if (richiesta.getDataFine() != null)
+			test += "per i Giorni " + richiesta.getDataInizio().toString() + " - " + richiesta.getDataFine().toString();
+		else
+			test += "per il Giorno " + richiesta.getDataInizio().toString();
+
+		if (richiesta.getTipoPermesso().equals(TipoPermesso.MALATTIA))
+			test += " Codice Certificato: " + richiesta.getCodiceCertificato();
+
+		test += " " + richiesta.getNote();
+
+		result.setOggetto(oggetto);
+		result.setTesto(test);
+		result.setDataInserimento(new Date());
+
+		return result;
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
